@@ -69,7 +69,7 @@ RUN rm -r /var/lib/apt/lists/*
 
 # set up passwordless sudo for user cs1670-user
 RUN useradd -m -s /bin/bash cs1670-user && \
-  echo "cs1670-user ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/cs1670-init
+  echo "os-dev ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/cs1670-init
 
 # create binary reporting version of dockerfile
 RUN (echo '#\!/bin/sh'; echo 'if test "x$1" = x-n; then echo 12; else echo 12.arm64; fi') > /usr/bin/cs1670-docker-version; chmod ugo+rx,u+w,go-w /usr/bin/cs1670-docker-version
@@ -84,7 +84,7 @@ RUN git config --global user.name "${USER}" && \
   git config --global user.email "${EMAIL}" && \
   (echo "(custom-set-variables"; echo " '(c-basic-offset 4)"; echo " '(indent-tabs-mode nil))") > ~/.emacs && \
   (echo "set expandtab"; echo "set shiftwidth=4"; echo "set softtabstop=4") > ~/.vimrc && \
-  (echo "if test -f /run/host-services/ssh-auth.sock; then"; echo "  sudo chown cs1670-user:cs1670-user /run/host-services/ssh-auth.sock"; echo "fi") > ~/.bash_profile && \
+  (echo "if test -f /run/host-services/ssh-auth.sock; then"; echo "  sudo chown os-dev:os-dev /run/host-services/ssh-auth.sock"; echo "fi") > ~/.bash_profile && \
   echo ". ~/.bashrc" >> ~/.bash_profile && \
   echo "export PATH=/usr/x86_64-linux-gnu/bin:\$PATH" >> ~/.bashrc && \
   rm -f ~/.bash_logout && \

@@ -44,9 +44,9 @@ elif test -z "$platform"; then
     platform=linux/amd64
 fi
 if test -z "$tag" -a "$platform" = linux/arm64; then
-    tag=cs1670:arm64
+    tag=cmps6770:arm64
 elif test -z "$tag"; then
-    tag=cs1670:latest
+    tag=cmps6700:latest
 fi
 
 if test $platform = linux/arm64; then

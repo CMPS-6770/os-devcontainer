@@ -1,8 +1,8 @@
 #! /bin/bash
 
 maindir=""
-destdir=cs1670
-container_name=cs1670-devenv
+destdir=cmps6770
+container_name=cmps6770-devenv
 
 clean=false
 verbose=false
@@ -39,9 +39,9 @@ elif test -z "$platform"; then
     platform=linux/amd64
 fi
 if test -z "$tag" -a "$platform" = linux/arm64; then
-    tag=cs1670:arm64
+    tag=cmps6770:arm64
 elif test -z "$tag"; then
-    tag=cs1670:latest
+    tag=cmps6770:latest
 fi
 
 vexec () {
@@ -122,8 +122,8 @@ vexec docker run -it --rm\
     --platform $platform \
     --privileged \
     --cap-add=SYS_PTRACE --cap-add=NET_ADMIN --security-opt seccomp=unconfined \
-    -v "$maindir/home":/home/cs1670-user \
-    -w "/home/cs1670-user" \
+    -v "$maindir/home":/home/os-dev \
+    -w "/home/os-dev" \
     --net=host \
     -e DISPLAY=host.docker.internal:0 \
     --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
