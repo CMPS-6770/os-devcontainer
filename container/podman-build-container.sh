@@ -46,7 +46,7 @@ fi
 if test -z "$tag" -a "$platform" = linux/arm64; then
     tag=cmps6770:arm64
 elif test -z "$tag"; then
-    tag=cmps6700:latest
+    tag=cmps6770:latest
 fi
 
 if test $platform = linux/arm64; then

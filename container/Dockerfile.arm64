@@ -67,30 +67,30 @@ ENV LC_ALL=en_US.UTF-8
 # remove unneeded .deb files
 RUN rm -r /var/lib/apt/lists/*
 
-# set up passwordless sudo for user cs1670-user
-RUN useradd -m -s /bin/bash cs1670-user && \
-  echo "os-dev ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/cs1670-init
+# set up passwordless sudo for user cmps6770-user
+RUN useradd -m -s /bin/bash cmps6770-user && \
+  echo "cmps6770-user ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/cmps6770-init
 
 # create binary reporting version of dockerfile
-RUN (echo '#\!/bin/sh'; echo 'if test "x$1" = x-n; then echo 12; else echo 12.arm64; fi') > /usr/bin/cs1670-docker-version; chmod ugo+rx,u+w,go-w /usr/bin/cs1670-docker-version
+RUN (echo '#\!/bin/sh'; echo 'if test "x$1" = x-n; then echo 12; else echo 12.arm64; fi') > /usr/bin/cmps6770-docker-version; chmod ugo+rx,u+w,go-w /usr/bin/cmps6770-docker-version
 
 # git build arguments
-ARG USER=CS1670 User
+ARG USER=cmps6770 User
 ARG EMAIL=nobody@example.com
 
 # configure your environment
-USER cs1670-user
+USER cmps6770-user
 RUN git config --global user.name "${USER}" && \
   git config --global user.email "${EMAIL}" && \
   (echo "(custom-set-variables"; echo " '(c-basic-offset 4)"; echo " '(indent-tabs-mode nil))") > ~/.emacs && \
   (echo "set expandtab"; echo "set shiftwidth=4"; echo "set softtabstop=4") > ~/.vimrc && \
-  (echo "if test -f /run/host-services/ssh-auth.sock; then"; echo "  sudo chown os-dev:os-dev /run/host-services/ssh-auth.sock"; echo "fi") > ~/.bash_profile && \
+  (echo "if test -f /run/host-services/ssh-auth.sock; then"; echo "  sudo chown cmps6770-user:cmps6770-user /run/host-services/ssh-auth.sock"; echo "fi") > ~/.bash_profile && \
   echo ". ~/.bashrc" >> ~/.bash_profile && \
   echo "export PATH=/usr/x86_64-linux-gnu/bin:\$PATH" >> ~/.bashrc && \
   rm -f ~/.bash_logout && \
   echo "add-auto-load-safe-path ~" > ~/.gdbinit
 
-WORKDIR /home/cs1670-user
+WORKDIR /home/cmps6770-user
 CMD ["/bin/bash", "-l"]
 
 # Initial version of this Dockerfile by Todd Morrill, CS 61 DCE student

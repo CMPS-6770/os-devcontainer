@@ -122,8 +122,8 @@ vexec docker run -it --rm\
     --platform $platform \
     --privileged \
     --cap-add=SYS_PTRACE --cap-add=NET_ADMIN --security-opt seccomp=unconfined \
-    -v "$maindir/home":/home/os-dev \
-    -w "/home/os-dev" \
+    -v "$maindir/home":/home/cmps6770-user \
+    -w "/home/cmps6770-user" \
     --net=host \
     -e DISPLAY=host.docker.internal:0 \
     --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
